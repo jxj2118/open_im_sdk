@@ -22,7 +22,7 @@ import 'interface/web/user.dart';
 class OpenIM {
   static const version = '3.8.1';
 
-  static IMManager manager = IMManager();
+  static IMManager iMManager = IMManager();
 }
 
 class IMManager {
@@ -53,6 +53,10 @@ class IMManager {
 
   // Compatible with old versions
   BaseUser get userManager => user;
+  BaseConversation get conversationManager => conversation;
+  BaseMessage get messageManager => message;
+  BaseFriendship get friendshipManager => friendship;
+  BaseGroup get groupManager => group;
 
   void _initConnection() {
     if (kIsWeb) {
