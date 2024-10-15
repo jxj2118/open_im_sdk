@@ -33,7 +33,7 @@ abstract class BaseMessage implements BaseListener {
 
   /// Delete a message from local storage
   /// [message] Message to be deleted
-  Future deleteMessageFromLocalStorage({
+  Future<bool> deleteMessageFromLocalStorage({
     required String conversationID,
     required String clientMsgID,
     String? operationID,
@@ -41,19 +41,19 @@ abstract class BaseMessage implements BaseListener {
 
   /// Delete a specified message from local and server
   /// [message] Message to be deleted
-  Future<dynamic> deleteMessageFromLocalAndSvr({
+  Future<bool> deleteMessageFromLocalAndSvr({
     required String conversationID,
     required String clientMsgID,
     String? operationID,
   });
 
   /// Delete all local chat records
-  Future<dynamic> deleteAllMsgFromLocal({
+  Future<bool> deleteAllMsgFromLocal({
     String? operationID,
   });
 
   /// Delete all chat records from local and server
-  Future<dynamic> deleteAllMsgFromLocalAndSvr({
+  Future<bool> deleteAllMsgFromLocalAndSvr({
     String? operationID,
   });
 
@@ -72,7 +72,7 @@ abstract class BaseMessage implements BaseListener {
   /// [groupID] Group ID
   /// [senderID] Sender's ID
   /// [message] Message content
-  Future<Message> insertGroupMessageToLocalStorage({
+  Future<Message?> insertGroupMessageToLocalStorage({
     required Message message,
     String? groupID,
     String? senderID,
@@ -104,7 +104,7 @@ abstract class BaseMessage implements BaseListener {
 
   /// Revoke a message
   /// [message] The message to be revoked
-  Future revokeMessage({
+  Future<bool> revokeMessage({
     required String conversationID,
     required String clientMsgID,
     String? operationID,
@@ -115,7 +115,7 @@ abstract class BaseMessage implements BaseListener {
   /// [startMsg] Query [count] messages starting from this message. The message at index == length - 1 is the latest message, so to get the next page of history, use startMsg = list.first
   /// [count] Total number of messages to retrieve in one request
   /// [lastMinSeq] Not required for the first page of messages, but necessary for getting the second page of history. Same as [startMsg]
-  Future<AdvancedMessage> getAdvancedHistoryMessageList({
+  Future<AdvancedMessage?> getAdvancedHistoryMessageList({
     required String conversationID,
     Message? startMsg,
     int lastMinSeq = 0,
@@ -127,7 +127,7 @@ abstract class BaseMessage implements BaseListener {
   /// [conversationID] Conversation ID, can be used for querying notifications
   /// [startMsg] Query [count] messages starting from this message. The message at index == length - 1 is the latest message, so to get the next page of history, use startMsg = list.last
   /// [count] Total number of messages to retrieve in one request
-  Future<AdvancedMessage> getAdvancedHistoryMessageListReverse({
+  Future<AdvancedMessage?> getAdvancedHistoryMessageListReverse({
     required String conversationID,
     Message? startMsg,
     int lastMinSeq = 0,
@@ -143,14 +143,14 @@ abstract class BaseMessage implements BaseListener {
     String? operationID,
   });
 
-  Future setMessageLocalEx({
+  Future<bool> setMessageLocalEx({
     required String conversationID,
     required String clientMsgID,
     required String localEx,
     String? operationID,
   });
 
-  Future setAppBadge(
+  Future<bool> setAppBadge(
     int count, {
     String? operationID,
   });

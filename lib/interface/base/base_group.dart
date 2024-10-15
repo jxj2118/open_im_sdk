@@ -7,7 +7,7 @@ abstract class BaseGroup implements BaseListener {
   /// Invite users to a group, allowing them to join without approval.
   /// [groupID] Group ID
   /// [userIDs] List of user IDs
-  Future<List<GroupInviteResult>> inviteUserToGroup({
+  Future<List<GroupInviteResult>?> inviteUserToGroup({
     required String groupID,
     required List<String> userIDs,
     String? reason,
@@ -18,7 +18,7 @@ abstract class BaseGroup implements BaseListener {
   /// [groupID] Group ID
   /// [userIDs] List of user IDs
   /// [reason] Reason for removal
-  Future<List<GroupInviteResult>> kickGroupMember({
+  Future<List<GroupInviteResult>?> kickGroupMember({
     required String groupID,
     required List<String> userIDs,
     String? reason,
@@ -28,14 +28,14 @@ abstract class BaseGroup implements BaseListener {
   /// Query group member information
   /// [groupID] Group ID
   /// [userIDs] List of user IDs
-  Future<List<GroupMembersInfo>> getGroupMembersInfo({
+  Future<List<GroupMembersInfo>?> getGroupMembersInfo({
     required String groupID,
     required List<String> userIDs,
     String? operationID,
   });
 
   /// Paginate and retrieve the group member list
-  Future<List<GroupMembersInfo>> getGroupMemberList({
+  Future<List<GroupMembersInfo>?> getGroupMemberList({
     required String groupID,
     GroupMemberFilter filter = GroupMemberFilter.all,
     int offset = 0,
@@ -44,7 +44,7 @@ abstract class BaseGroup implements BaseListener {
   });
 
   /// Paginate and retrieve the group member list as a map
-  Future<List<dynamic>> getGroupMemberListMap({
+  Future<List<dynamic>?> getGroupMemberListMap({
     required String groupID,
     GroupMemberFilter filter = GroupMemberFilter.all,
     int offset = 0,
@@ -57,14 +57,14 @@ abstract class BaseGroup implements BaseListener {
     String? operationID,
   });
 
-  Future<List<GroupInfo>> getJoinedGroupListPage({
+  Future<List<GroupInfo>?> getJoinedGroupListPage({
     String? operationID,
     int offset = 0,
     int count = 40,
   });
 
   /// Query the list of joined groups as a map
-  Future<List<dynamic>> getJoinedGroupListMap({
+  Future<List<Map<String, dynamic>>?> getJoinedGroupListMap({
     String? operationID,
   });
 
@@ -84,19 +84,19 @@ abstract class BaseGroup implements BaseListener {
   });
 
   /// Edit group information
-  Future<dynamic> setGroupInfo(
+  Future<bool> setGroupInfo(
     GroupInfo groupInfo, {
     String? operationID,
   });
 
   /// Query group information
-  Future<List<GroupInfo>> getGroupsInfo({
+  Future<List<GroupInfo>?> getGroupsInfo({
     required List<String> groupIDs,
     String? operationID,
   });
 
   /// Apply to join a group
-  Future<dynamic> joinGroup({
+  Future<bool> joinGroup({
     required String groupID,
     String? reason,
     String? operationID,
@@ -105,30 +105,30 @@ abstract class BaseGroup implements BaseListener {
   });
 
   /// Exit a group
-  Future<dynamic> quitGroup({
+  Future<bool> quitGroup({
     required String groupID,
     String? operationID,
   });
 
   /// Transfer group ownership
-  Future<dynamic> transferGroupOwner({
+  Future<bool> transferGroupOwner({
     required String groupID,
     required String userID,
     String? operationID,
   });
 
   /// Handle group membership applications received as a group owner or administrator
-  Future<List<GroupApplicationInfo>> getGroupApplicationListAsRecipient({
+  Future<List<GroupApplicationInfo>?> getGroupApplicationListAsRecipient({
     String? operationID,
   });
 
   /// Get the list of group membership applications sent by the user
-  Future<List<GroupApplicationInfo>> getGroupApplicationListAsApplicant({
+  Future<List<GroupApplicationInfo>?> getGroupApplicationListAsApplicant({
     String? operationID,
   });
 
   /// Accept a group membership application as an administrator or group owner
-  Future<dynamic> acceptGroupApplication({
+  Future<bool> acceptGroupApplication({
     required String groupID,
     required String userID,
     String? handleMsg,
@@ -136,7 +136,7 @@ abstract class BaseGroup implements BaseListener {
   });
 
   /// Refuse a group membership application as an administrator or group owner
-  Future<dynamic> refuseGroupApplication({
+  Future<bool> refuseGroupApplication({
     required String groupID,
     required String userID,
     String? handleMsg,
@@ -144,20 +144,20 @@ abstract class BaseGroup implements BaseListener {
   });
 
   /// Dissolve a group
-  Future<dynamic> dismissGroup({
+  Future<bool> dismissGroup({
     required String groupID,
     String? operationID,
   });
 
   /// Enable or disable group mute
-  Future<dynamic> changeGroupMute({
+  Future<bool> changeGroupMute({
     required String groupID,
     required bool mute,
     String? operationID,
   });
 
   /// Mute a group member
-  Future<dynamic> changeGroupMemberMute({
+  Future<bool> changeGroupMemberMute({
     required String groupID,
     required String userID,
     int seconds = 0,
@@ -166,7 +166,7 @@ abstract class BaseGroup implements BaseListener {
 
   /// Set the nickname of a group member
   @Deprecated('Use [setGroupMemberInfo] instead')
-  Future<dynamic> setGroupMemberNickname({
+  Future<bool> setGroupMemberNickname({
     required String groupID,
     required String userID,
     String? groupNickname,
@@ -174,7 +174,7 @@ abstract class BaseGroup implements BaseListener {
   });
 
   /// Search for groups
-  Future<List<GroupInfo>> searchGroups({
+  Future<List<GroupInfo>?> searchGroups({
     List<String> keywords = const [],
     bool isSearchGroupID = false,
     bool isSearchGroupName = false,
@@ -183,7 +183,7 @@ abstract class BaseGroup implements BaseListener {
 
   /// Set group member role
   @Deprecated('Use [setGroupMemberInfo] instead')
-  Future<dynamic> setGroupMemberRoleLevel({
+  Future<bool> setGroupMemberRoleLevel({
     required String groupID,
     required String userID,
     required int roleLevel,
@@ -191,7 +191,7 @@ abstract class BaseGroup implements BaseListener {
   });
 
   /// Get a group member list based on join time
-  Future<List<GroupMembersInfo>> getGroupMemberListByJoinTime({
+  Future<List<GroupMembersInfo>?> getGroupMemberListByJoinTime({
     required String groupID,
     int offset = 0,
     int count = 0,
@@ -203,7 +203,7 @@ abstract class BaseGroup implements BaseListener {
 
   /// Set group verification
   @Deprecated('Use [setGroupInfo] instead')
-  Future<dynamic> setGroupVerification({
+  Future<bool> setGroupVerification({
     required String groupID,
     required GroupVerificationType needVerification,
     String? operationID,
@@ -211,7 +211,7 @@ abstract class BaseGroup implements BaseListener {
 
   /// Allow/disallow members to add friends through the group
   @Deprecated('Use [setGroupInfo] instead')
-  Future<dynamic> setGroupLookMemberInfo({
+  Future<bool> setGroupLookMemberInfo({
     required String groupID,
     required int status,
     String? operationID,
@@ -219,20 +219,20 @@ abstract class BaseGroup implements BaseListener {
 
   /// Allow/disallow members to add friends through the group
   @Deprecated('Use [setGroupInfo] instead')
-  Future<dynamic> setGroupApplyMemberFriend({
+  Future<bool> setGroupApplyMemberFriend({
     required String groupID,
     required int status,
     String? operationID,
   });
 
   /// Get group owners and administrators
-  Future<List<GroupMembersInfo>> getGroupOwnerAndAdmin({
+  Future<List<GroupMembersInfo>?> getGroupOwnerAndAdmin({
     required String groupID,
     String? operationID,
   });
 
   /// Search for group members
-  Future<List<GroupMembersInfo>> searchGroupMembers({
+  Future<List<GroupMembersInfo>?> searchGroupMembers({
     required String groupID,
     List<String> keywords = const [],
     bool isSearchUserID = false,
@@ -243,7 +243,7 @@ abstract class BaseGroup implements BaseListener {
   });
 
   /// Search for group members as a map
-  Future<List<dynamic>> searchGroupMembersListMap({
+  Future<List<Map<String, dynamic>>?> searchGroupMembersListMap({
     required String groupID,
     List<String> keywords = const [],
     bool isSearchUserID = false,
@@ -254,13 +254,13 @@ abstract class BaseGroup implements BaseListener {
   });
 
   /// Modify the GroupMemberInfo ex field
-  Future<dynamic> setGroupMemberInfo({
+  Future<bool> setGroupMemberInfo({
     required GroupMembersInfo groupMembersInfo,
     String? operationID,
   });
 
   /// Get users in the group
-  Future<dynamic> getUsersInGroup(
+  Future<bool> getUsersInGroup(
     String groupID,
     List<String> userIDs, {
     String? operationID,

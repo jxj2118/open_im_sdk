@@ -1,3 +1,8 @@
+#ifdef __APPLE__
+#define login hide_login
+#define logout hide_logout
+#endif
+
 #include "openimsdk.h"
 
 #if _WIN32
