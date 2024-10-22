@@ -967,17 +967,22 @@ class GroupHasReadInfo {
   /// Total number of reads
   int? hasReadCount;
 
-  int? unreadCount;
+  int? groupMemberCount;
+
+  List<String>? hasReadUserIDList;
 
   GroupHasReadInfo.fromJson(Map<String, dynamic> json) {
     hasReadCount = json['hasReadCount'] ?? 0;
-    unreadCount = json['unreadCount'] ?? 0;
+    groupMemberCount = json['groupMemberCount'] ?? 0;
+    print("GroupHasReadInfo.fromJson hasReadUserIDList ${json['hasReadUserIDList']}");
+    hasReadUserIDList = json['hasReadUserIDList'] == null ? [] : json['hasReadUserIDList'].cast<String>() ?? [];
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['hasReadCount'] = hasReadCount;
-    data['unreadCount'] = unreadCount;
+    data['groupMemberCount'] = groupMemberCount;
+    data['hasReadUserIDList'] = hasReadUserIDList;
     return data;
   }
 }

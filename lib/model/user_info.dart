@@ -42,7 +42,7 @@ class UserInfo {
     remark = json['remark'] ?? remark;
     ex = json['ex'] ?? ex;
     createTime = json['createTime'];
-    globalRecvMsgOpt = ReceiveMessageOpt.fromValue(json['globalRecvMsgOpt']);
+    globalRecvMsgOpt = json['globalRecvMsgOpt'] == null ? null : ReceiveMessageOpt.fromValue(json['globalRecvMsgOpt']);
   }
 
   Map<String, dynamic> toJson() {

@@ -46,17 +46,21 @@ class Utils {
 
         debugPrint('Native CBSISS return success: $dartOperationID, $errorCode, $dataString[${dataString.length}]');
 
-        if (dataString.isNotEmpty) {
-          onSuccess
-              .call(dataString.startsWith('{') || dataString.startsWith('[') ? jsonDecode(dataString) : dataString);
-        } else {
-          onSuccess.call(dataString);
-        }
+        // if (dataString.isNotEmpty) {
+        //   var x = dataString.startsWith('{') || dataString.startsWith('[') ? jsonDecode(dataString) : dataString;
+        //   debugPrint('Native CBSISS x: ${dataString.startsWith('{') || dataString.startsWith('[')} \n$x\n${x.runtimeType}');
+        //
+        //   onSuccess
+        //       .call(x);
+        // } else {
+        //   onSuccess.call(dataString);
+        // }
 
         try {
           final json = jsonDecode(dataString);
           onSuccess.call(json);
         } catch (e) {
+          debugPrint("Native CBSISS eee $e");
           onSuccess.call(dataString);
         }
 
